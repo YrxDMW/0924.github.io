@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+
+
+<head>
+    <title>圣诞祝福 - 编程狮(w3cschool.cn)</title>
+    <meta charset="utf-8">
+    <style>
+        /* 设置整个页面的基本样式 */
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: #000; /* 黑色背景 */
+            overflow: hidden; /* 隐藏溢出内容 */
+            position: relative; /* 使子元素可以相对于此元素定位 */
+        }
+
+
+        /* 应用程序容器的样式 */
+        .app {
+            text-align: center; /* 文本居中对齐 */
+            margin: 10px; /* 外边距 */
+        }
+
+
+        /* 圣诞树的样式 */
+        .christmas-tree {
+            position: absolute; /* 绝对定位 */
+            margin: 0; /* 没有外边距 */
+            width: 200px; /* 宽度 */
+            height: 300px; /* 高度 */
+            top: 50%; /* 垂直居中 */
+            left: 50%; /* 水平居中 */
+            transform: translate(-50%, -50%); /* 精确居中 */
+        }
+
+
+        /* 圣诞树枝干的通用样式 */
+        .christmas-tree .branch {
+            position: absolute; /* 绝对定位 */
+            background-color: #008000; /* 绿色背景 */
+            border-radius: 50% 50% 0 0; /* 上半部分圆角 */
+        }
+
+
+        /* 顶部枝干的样式 */
+        .christmas-tree .branch.top {
+            width: 160px; /* 宽度 */
+            height: 100px; /* 高度 */
+            top: 0; /* 从顶部开始 */
+            left: 20px; /* 从左边偏移 */
+        }
+
+
+        /* 中部枝干的样式 */
+        .christmas-tree .branch.middle {
+            width: 200px; /* 宽度 */
+            height: 120px; /* 高度 */
+            top: 100px; /* 从顶部偏移 */
+            left: 0; /* 从左边开始 */
+        }
+
+
+        /* 底部枝干的样式 */
+        .christmas-tree .branch.bottom {
+            width: 240px; /* 宽度 */
+            height: 140px; /* 高度 */
+            top: 220px; /* 从顶部偏移 */
+            left: -20px; /* 从左边偏移 */
+        }
+
+
+        /* 圣诞树树干的样式 */
+        .christmas-tree .trunk {
+            width: 40px; /* 宽度 */
+            height: 80px; /* 高度 */
+            background-color: #8B4513; /* 棕色背景 */
+            position: absolute; /* 绝对定位 */
+            bottom: 0; /* 从底部开始 */
+            left: 80px; /* 从左边偏移 */
+            border-radius: 5px; /* 圆角 */
+        }
+
+
+        /* 圣诞树星星的样式 */
+        .christmas-tree .star {
+            position: absolute; /* 绝对定位 */
+            top: -20px; /* 从顶部偏移 */
+            left: 80px; /* 从左边偏移 */
+            width: 40px; /* 宽度 */
+            height: 40px; /* 高度 */
+            background-color: gold; /* 金色背景 */
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* 星星形状 */
+            animation: star-twinkle 2s infinite alternate; /* 闪烁动画 */
+        }
+
+
+        /* 圣诞树装饰物的样式 */
+        .christmas-tree .ornament {
+            position: absolute; /* 绝对定位 */
+            width: 20px; /* 宽度 */
+            height: 20px; /* 高度 */
+            background-color: red; /* 红色背景 */
+            border-radius: 50%; /* 圆形 */
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* 发光效果 */
+            animation: ornament-twinkle 2s infinite alternate; /* 闪烁动画 */
+        }
+
+
+        /* 星星闪烁动画 */
+        @keyframes star-twinkle {
+            0% {
+                transform: scale(1); /* 初始大小 */
+            }
+            100% {
+                transform: scale(1.2); /* 放大 */
+            }
+        }
+
+
+        /* 装饰物闪烁动画 */
+        @keyframes ornament-twinkle {
+            0% {
+                transform: scale(1); /* 初始大小 */
+            }
+            100% {
+                transform: scale(1.2); /* 放大 */
+            }
+        }
+
+
+        /* 雪花效果 */
+        .snowflake {
+            position: absolute; /* 绝对定位 */
+            width: 10px; /* 宽度 */
+            height: 10px; /* 高度 */
+            background-color: white; /* 白色背景 */
+            border-radius: 50%; /* 圆形 */
+            opacity: 0.8; /* 透明度 */
+            animation: fall linear infinite; /* 下落动画 */
+        }
+
+
+        /* 雪花下落动画 */
+        @keyframes fall {
+            0% {
+                top: -10px; /* 从顶部开始 */
+                opacity: 0.8; /* 透明度 */
+            }
+            100% {
+                top: 100vh; /* 下落到屏幕底部 */
+                opacity: 0; /* 透明度逐渐消失 */
+            }
+        }
+
+
+        /* 消息文本的样式 */
+        .message {
+            position: absolute; /* 绝对定位 */
+            top: 15%; /* 从顶部偏移 */
+            left: 50%; /* 从左边偏移 */
+            transform: translate(-50%, -50%); /* 精确居中 */
+            color: white; /* 白色文字 */
+            font-size: 48px; /* 字体大小 */
+            font-family: Arial, sans-serif; /* 字体 */
+            text-shadow: 0 0 10px white; /* 发光效果 */
+           /* animation: fadeInOut 4s infinite; /* 渐隐渐现动画 */
+        }
+
+	.message2 {
+            position: absolute; /* 绝对定位 */
+            top: 22%; /* 从顶部偏移 */
+            left: 51%; /* 从左边偏移 */
+            transform: translate(-50%, -50%); /* 精确居中 */
+            color: white; /* 白色文字 */
+            font-size: 48px; /* 字体大小 */
+            font-family: Arial, sans-serif; /* 字体 */
+            text-shadow: 0 0 10px white; /* 发光效果 */
+           /* animation: fadeInOut 4s infinite; /* 渐隐渐现动画 */
+        }
+
+
+
+        /* 消息文本渐隐渐现动画 */
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0; /* 完全透明 */
+            }
+            50% {
+                opacity: 1; /* 完全不透明 */
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="app">
+        <div class="christmas-tree">
+            <div class="branch top"></div> <!-- 顶部枝干 -->
+            <div class="branch middle"></div> <!-- 中部枝干 -->
+           <!-- <div class="branch bottom"></div> <!-- 底部枝干 -->
+            <div class="trunk"></div> <!-- 树干 -->
+            <div class="star"></div> <!-- 星星 -->
+            <div class="ornament" style="top: 60px; left: 60px;"></div> <!-- 装饰物1 -->
+            <div class="ornament" style="top: 100px; left: 140px;"></div> <!-- 装饰物2 -->
+            <div class="ornament" style="top: 140px; left: 100px;"></div> <!-- 装饰物3 -->
+            <div class="ornament" style="top: 180px; left: 180px;"></div> <!-- 装饰物4 -->
+            <div class="ornament" style="top: 190px; left: 20px;"></div> <!-- 装饰物5 -->
+        </div>
+    </div>
+
+	<div class="message"></div>
+    <div class="message2">吴梦宝宝~圣诞快乐！</div>
+
+
+    <script>
+        // 创建雪花
+        function createSnowflakes(num) {
+            for (let i = 0; i < num; i++) {
+                const snowflake = document.createElement('div'); // 创建一个 div 元素
+                snowflake.classList.add('snowflake'); // 添加雪花类
+                snowflake.style.left = Math.random() * 100 + 'vw'; // 随机水平位置
+                snowflake.style.animationDuration = Math.random() * 2 + 2.5 + 's'; // 随机动画持续时间
+                document.body.appendChild(snowflake); // 将雪花添加到页面
+            }
+        }
+
+
+        // 调用函数创建雪花
+        createSnowflakes(80);
+    </script>
+</body>
+
+
+</html>
